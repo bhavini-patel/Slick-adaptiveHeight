@@ -1,0 +1,47 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+<script>
+$('.carousel').slick({
+  dots: false,
+  infinite: true,
+  speed: 300,
+  slidesToShow: 4,
+  slidesToScroll: 1,
+  adaptiveHeight: true,
+  centerMode: false,
+  arrow:false,
+  responsive: [
+    {
+      breakpoint: 1200, // large screen (laptops/tablets)
+      settings: {
+        slidesToShow: 3
+      }
+    },
+    {
+      breakpoint: 992, // medium screen (tablets)
+      settings: {
+        slidesToShow: 2
+      }
+    },
+    {
+      breakpoint: 576, // small screen (mobiles)
+      settings: {
+        slidesToShow: 1,
+        centerMode: true,
+      }
+    }
+  ]
+});
+function equalizeSlideHeights() {
+  var maxHeight = 0;
+  $('.carousel .slick-slide').each(function(){
+    var thisH = $(this).outerHeight();
+    if (thisH > maxHeight) maxHeight = thisH;
+  });
+  $('.carousel .slick-slide').css('height', maxHeight + 'px');
+}
+
+$(window).on('load resize', function(){
+  setTimeout(equalizeSlideHeights, 500);  
+});
+</script>
